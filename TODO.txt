@@ -1,0 +1,3 @@
+Make an apache2::ssl class and move all the cert stuff out into that. Have a vhost
+Apache2::ssl[$certbundlename]->Apache2::Vhost[$name]
+TESTS
