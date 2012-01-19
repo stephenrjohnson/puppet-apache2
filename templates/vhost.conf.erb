@@ -1,0 +1,31 @@
+<VirtualHost <%= listen %>:<%= port %>>
+        ServerAdmin <%= serveradmin %>
+        ServerName <%= servername %>
+        <% if serveralias != "" -%>
+        ServerAlias <%= serveralias %>
+        <% end -%>
+        
+        DocumentRoot <%= docroot %>
+
+        CustomLog ${APACHE_LOG_DIR}/<%= name %>_access.log combined
+        ErrorLog ${APACHE_LOG_DIR}/<%= name %>_error.log
+
+	<Directory <%= docroot %>>
+                Options -Indexes FollowSymLinks MultiViews
+                AllowOverride ALL
+                Order allow,deny
+                allow from all
+        </Directory>
+        
+	LogLevel <%= aloglevel %>
+
+        <% if ssl == true %> 
+                SSLEngine On
+                SSLProtocol ALL -SSLv2
+                SSLCipherSuite HIGH:!SSLv2:!ADH:!aNULL:!eNULL:!NULL
+                SSLCertificateFile    /etc/apache2/ssl/<%= sslcert %>
+                SSLCertificateKeyFile /etc/apache2/ssl/<%= sslkey %>
+                # Only Needed if the CA uses an intermediate certificate
+                SSLCACertificateFile /etc/apache2/ssl/<%= sslca %>
+        <% end %>    
+</VirtualHost>
