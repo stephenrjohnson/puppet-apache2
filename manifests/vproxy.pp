@@ -42,11 +42,6 @@ define apache2::vproxy($servername = '', $serveradmin = 'root@localhost', $alogl
         notify => Service[apache2],
     }
     
-    file { $docroot:
-        ensure => directory,
-        require => Package[apache2],
-    }
-
     if ($ssl == true)
     {
         file {
