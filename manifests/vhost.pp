@@ -3,15 +3,6 @@ define apache2::vhost($servername = '', $serveradmin = 'root@localhost', $docroo
                       $aloglevel = 'warn', $serveralias = '', $port = false, $listen = "*",
                        $ssl = false, $sslcert = "", $sslkey = "",$sslca = "" ) 
 {   
-    #sort out that we need apache2
-    Class['apache2']->Apache2::Vhost[$name]
-
-    #if we are ssl then we need the ssl module
-    if $ssl != false
-    {
-       Class['apache2::ssl']->Apache2::Vhost[$name] 
-    }
-
     #sort out the default port values 
     if ( $port == false and $ssl == false )
     {

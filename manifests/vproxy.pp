@@ -4,15 +4,6 @@ define apache2::vproxy($servername = '', $serveradmin = 'root@localhost', $alogl
                         $sslcert = "", $sslkey = "",$sslca = "", $proxypass = false, $proxypassreverse= false,
                         $proxyrequests = "off", $proxyhost = false ) 
 {   
-    #sort out that we need apache2
-    Class['apache2']->Apache2::Vproxy[$name]
-
-    #if we are ssl then we need the ssl module
-    if $ssl != false
-    {
-       Class['apache2::ssl']->Apache2::Vproxy[$name] 
-    }
-
     #sort out the default port values 
     if $port == false and ssl == false
     {
