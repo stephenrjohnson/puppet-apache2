@@ -24,9 +24,9 @@ Add the follow to your node def
 
 ### Proxy
   apache2::vproxy{ "testsite" : servername => 'testsites.testdomain.com', serveradmin => 'root@testite.com',
-                 proxypass => "/  http://localhost:8080/", proxypassreverse => "/  http://localhost:8080/", proxyhost => "http://localhost:8080/" }
+                 proxypass => "/  http://localhost:8080/", proxypassreverse => "/ , http://localhost:8080/", proxyhost => "http://localhost:8080/" }
   apache2::vproxy{ "testsite" : servername => 'testsites.testdomain.com', serveradmin => 'root@testite.com', 
-                 ssl => true, sslcert => "somecert", sslkey => "somekey", sslca => "someca"; proxypass => "/  http://localhost:8080/", 
+                 ssl => true, sslcert => "somecert", sslkey => "somekey", sslca => "someca", proxypass => "/ , http://localhost:8080/", 
                  proxypassreverse => "/  http://localhost:8080/", proxyhost => "http://localhost:8080/" }
 {   
 ### Issues
