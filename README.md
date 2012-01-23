@@ -23,7 +23,8 @@ Add the follow to your node def
                  ssl => true, sslcert => "somecert", sslkey => "somekey", sslca => "someca"; }
 
 ### Proxy
-
+  apache2::vproxy("testsite" : servername => 'testsites.testdomain.com', serveradmin => 'root@testite.com', docroot => '/var/testsite',
+                 proxypass => "/  http://localhost:8080/", proxypassreverse => "/  http://localhost:8080/", proxyhost => "http://localhost:8080/" ) 
   apache2::vproxy("testsite" : servername => 'testsites.testdomain.com', serveradmin => 'root@testite.com', docroot => '/var/testsite',
                  ssl => true, sslcert => "somecert", sslkey => "somekey", sslca => "someca"; proxypass => "/  http://localhost:8080/", 
                  proxypassreverse => "/  http://localhost:8080/", proxyhost => "http://localhost:8080/" ) 

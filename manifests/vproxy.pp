@@ -14,7 +14,7 @@ define apache2::vproxy($servername = '', $serveradmin = 'root@localhost', $alogl
     }
 
     #sort out the default port values 
-    if $port == false and ssl != false
+    if $port == false and ssl == false
     {
         $aport = 80
     }

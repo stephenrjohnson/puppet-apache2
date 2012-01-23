@@ -13,7 +13,7 @@ define apache2::vhost($servername = '', $serveradmin = 'root@localhost', $docroo
     }
 
     #sort out the default port values 
-    if ( $port == false and $ssl != false )
+    if ( $port == false and $ssl == false )
     {
         $aport = 80
     }
