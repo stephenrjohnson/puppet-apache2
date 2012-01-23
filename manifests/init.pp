@@ -1,4 +1,4 @@
-class apache2 ($defaultsite = false, $disablehttp = false, $enablessl = false, $defaultsslsite = false, $security = true){
+class apache2 ($defaultsite = false, $disablehttp = false, $enablessl = false, $enableproxy = false, $defaultsslsite = false, $security = true){
        
     ##Install the apache module
     package { apache2: ensure => installed; }
@@ -10,19 +10,15 @@ class apache2 ($defaultsite = false, $disablehttp = false, $enablessl = false, $
         hasstatus => true,
         require => [File["/etc/apache2/apache2.conf"],Package[apache2]];
     }
-
+    
     if ($enablessl == true)
     {
         class { "apache2::ssl": defaultsite => $defaultsslsite ;}
-        
-        file 
-        {
-            "/etc/apache2/ssl":
-            ensure => directory,
-            require => Package[apache2],
-            mode => 0755;
-        }
+    }
 
+    if ($enableproxy == true)
+    {
+        class { "apache2::proxy": ;}
     }
 
     File {
