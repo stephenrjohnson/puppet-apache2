@@ -8,9 +8,9 @@ class apache2 ($defaultsite = false, $disablehttp = false, $enablessl = false, $
         enable => true,
         hasrestart => true,
         hasstatus => true,
-        require => [File["/etc/apache2/apache2.conf"],Package[apache2]];
+        require => File["/etc/apache2/apache2.conf"];
     }
-    
+
     if ($enablessl == true)
     {
         class { "apache2::ssl": defaultsite => $defaultsslsite ;}
