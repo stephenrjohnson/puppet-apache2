@@ -31,7 +31,6 @@ define apache2::vhost($servername = '', $serveradmin = 'root@localhost', $docroo
         mode => 0440,
         owner => root,
         group => root,
-        require => [Package[apache2],File["/var/log/apache2"],File[$docroot]],
         notify => Service[apache2],
         content => template("apache2/vhost.conf.erb");
     }
@@ -53,7 +52,6 @@ define apache2::vhost($servername = '', $serveradmin = 'root@localhost', $docroo
             ensure => present,
             mode => 0444,
             source => "puppet:///modules/apache2/etc/apache2/ssl/$sslcert",
-            require => [Package[apache2], Class['apache2::ssl']];
         }
         
          file {
@@ -61,7 +59,6 @@ define apache2::vhost($servername = '', $serveradmin = 'root@localhost', $docroo
             ensure => present,
             mode => 0444,
             source => "puppet:///modules/apache2/etc/apache2/ssl/$sslkey",
-            require => [Package[apache2], Class['apache2::ssl']];
         }
         
          file {
@@ -69,7 +66,6 @@ define apache2::vhost($servername = '', $serveradmin = 'root@localhost', $docroo
             ensure => present,
             mode => 0444,
             source => "puppet:///modules/apache2/etc/apache2/ssl/$sslca",
-            require => [Package[apache2], Class['apache2::ssl']];
         } 
     }
 }

@@ -32,7 +32,6 @@ define apache2::vproxy($servername = '', $serveradmin = 'root@localhost', $alogl
         mode => 0440,
         owner => root,
         group => root,
-        require => [Package[apache2],File["/var/log/apache2"]],
         notify => Service[apache2],
         content => template("apache2/vproxy.conf.erb");
     }
@@ -49,7 +48,6 @@ define apache2::vproxy($servername = '', $serveradmin = 'root@localhost', $alogl
             ensure => present,
             mode => 0444,
             source => "puppet:///modules/apache2/etc/apache2/ssl/$sslcert",
-            require => Package[apache2];
         }
         
          file {
@@ -57,7 +55,6 @@ define apache2::vproxy($servername = '', $serveradmin = 'root@localhost', $alogl
             ensure => present,
             mode => 0444,
             source => "puppet:///modules/apache2/etc/apache2/ssl/$sslkey",
-            require => Package[apache2];
         }
         
          file {
@@ -65,7 +62,6 @@ define apache2::vproxy($servername = '', $serveradmin = 'root@localhost', $alogl
             ensure => present,
             mode => 0444,
             source => "puppet:///modules/apache2/etc/apache2/ssl/$sslca",
-            require => Package[apache2];
         } 
     }
 }
