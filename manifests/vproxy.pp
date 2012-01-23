@@ -32,7 +32,7 @@ define apache2::vproxy($servername = '', $serveradmin = 'root@localhost', $alogl
         mode => 0440,
         owner => root,
         group => root,
-        require => [Package[apache2],File["/var/log/apache2"],
+        require => [Package[apache2],File["/var/log/apache2"]],
         notify => Service[apache2],
         content => template("apache2/vproxy.conf.erb");
     }
