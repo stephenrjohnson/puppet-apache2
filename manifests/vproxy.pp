@@ -34,7 +34,7 @@ define apache2::vproxy($servername = '', $serveradmin = 'root@localhost', $alogl
         group => root,
         require => [Package[apache2],File["/var/log/apache2"],File[$docroot]],
         notify => Service[apache2],
-        content => template("apache2/vhost.conf.erb");
+        content => template("apache2/vproxy.conf.erb");
     }
 
     file { "/etc/apache2/sites-enabled/$name.conf":
