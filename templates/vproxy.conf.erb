@@ -12,14 +12,7 @@
         
         CustomLog ${APACHE_LOG_DIR}/<%= name %>_access.log combined
         ErrorLog ${APACHE_LOG_DIR}/<%= name %>_error.log
-
-	<Directory <%= docroot %>>
-                Options -Indexes FollowSymLinks MultiViews
-                AllowOverride ALL
-                Order allow,deny
-                allow from all
-        </Directory>
-        
+       
 	LogLevel <%= aloglevel %>
 
         <% if ssl == true %> 
