@@ -1,7 +1,7 @@
 # generic vhost template, probably not that useful for very custom vhosts
 define apache2::vhost($servername = '', $serveradmin = 'root@localhost', $docroot = '/var/empty', 
                       $aloglevel = 'warn', $serveralias = '', $port = false, $listen = "*",
-                       $ssl = false, $sslcert = "", $sslkey = "",$sslca = "" ) 
+                       $ssl = false, $sslkeys = false ) 
 {   
     #sort out the default port values 
     if ( $port == false and $ssl == false )
@@ -36,28 +36,9 @@ define apache2::vhost($servername = '', $serveradmin = 'root@localhost', $docroo
     	  require => Package[apache2],
     }
 
-    if ($ssl == true)
+    if $ssl != false
     {
-        file {
-            "/etc/apache2/ssl/$sslcert":
-            ensure => present,
-            mode => 0444,
-            source => "puppet:///modules/apache2/etc/apache2/ssl/$sslcert",
-        }
-        
-         file {
-            "/etc/apache2/ssl/$sslkey":
-            ensure => present,
-            mode => 0444,
-            source => "puppet:///modules/apache2/etc/apache2/ssl/$sslkey",
-        }
-        
-         file {
-            "/etc/apache2/ssl/$sslca":
-            ensure => present,
-            mode => 0444,
-            source => "puppet:///modules/apache2/etc/apache2/ssl/$sslca",
-        } 
+       Apache2::vproxy[$name]->Apache2::sslkey[$sslkeys] 
     }
 }
 
