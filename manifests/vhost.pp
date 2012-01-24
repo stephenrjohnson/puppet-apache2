@@ -26,20 +26,25 @@ define apache2::vhost($servername = '', $serveradmin = 'root@localhost', $docroo
         content => template("apache2/vhost.conf.erb");
     }
 
+    if $ssl != false
+    {
+       require apache2::sslkey[$sslkeys] 
+       $sslcert = apache2::sslkey[$sslkeys]::sslcert
+       $sslkey = apache2::sslkey[$sslkeys]::sslkey
+       $sslca = apache2::sslkey[$sslkeys]::sslca
+    }
+
+
     file { "/etc/apache2/sites-enabled/$name.conf":
-	      ensure => "/etc/apache2/sites-available/$name.conf",
-	      notify => Service[apache2],
+          ensure => "/etc/apache2/sites-available/$name.conf",
+          notify => Service[apache2],
     }
     
     file { $docroot:
         ensure => directory,
-    	  require => Package[apache2],
+          require => Package[apache2],
     }
 
-    if $ssl != false
-    {
-       Apache2::vproxy[$name]->Apache2::sslkey[$sslkeys] 
-    }
 }
 
 

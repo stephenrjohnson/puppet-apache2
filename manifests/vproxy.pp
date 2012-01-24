@@ -18,6 +18,15 @@ define apache2::vproxy($servername = '', $serveradmin = 'root@localhost', $alogl
         $aport = $port 
     }
     
+    if $ssl != false
+    {
+       require apache2::sslkey[$sslkeys] 
+       $sslcert = apache2::sslkey[$sslkeys]::sslcert
+       $sslkey = apache2::sslkey[$sslkeys]::sslkey
+       $sslca = apache2::sslkey[$sslkeys]::sslca
+
+    }
+    
     file { "/etc/apache2/sites-available/$name.conf":
         ensure => present,
         mode => 0440,
@@ -32,11 +41,6 @@ define apache2::vproxy($servername = '', $serveradmin = 'root@localhost', $alogl
         notify => Service[apache2],
     }
 
-    if $ssl != false
-    {
-       require apache2::sslkey[$sslkeys] 
-    }
-    
 }
 
 
