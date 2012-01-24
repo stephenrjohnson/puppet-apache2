@@ -38,7 +38,7 @@ It will pull the files out of apache2/etc/apache2/ssl/$name.ca, apache2/etc/apac
   * Dedian / ubuntu only
   * No require for the ssl keys
   * Can't define custom ssl options
-  * Can't use custom ports just yey
+  * Can't use custom ports just yet
   * Vhosts are very brittle ( not that many options)
   * NO TESTS
   * Written by me lol 
