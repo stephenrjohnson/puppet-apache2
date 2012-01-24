@@ -1,4 +1,4 @@
-define apache2::sslkey() 
+define apache2::sslkeys() 
 {   
         file {
             "/etc/apache2/ssl/$name.cert":
