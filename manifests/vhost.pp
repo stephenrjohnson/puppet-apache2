@@ -28,10 +28,9 @@ define apache2::vhost($servername = '', $serveradmin = 'root@localhost', $docroo
 
     if $ssl != false
     {
-       require apache2::sslkey[$sslkeys] 
-       $sslcert = apache2::sslkey[$sslkeys]::sslcert
-       $sslkey = apache2::sslkey[$sslkeys]::sslkey
-       $sslca = apache2::sslkey[$sslkeys]::sslca
+       $sslcert = $sslkeys + ".cert"
+       $sslkey = $sslkeys + ".key"
+       $sslca = $sslkeys + ".ca"
     }
 
 
