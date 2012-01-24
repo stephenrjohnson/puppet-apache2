@@ -33,7 +33,6 @@ define apache2::vhost($servername = '', $serveradmin = 'root@localhost', $docroo
        $sslca = $sslkeys + ".ca"
     }
 
-
     file { "/etc/apache2/sites-enabled/$name.conf":
           ensure => "/etc/apache2/sites-available/$name.conf",
           notify => Service[apache2],
@@ -43,7 +42,6 @@ define apache2::vhost($servername = '', $serveradmin = 'root@localhost', $docroo
         ensure => directory,
           require => Package[apache2],
     }
-
 }
 
 
