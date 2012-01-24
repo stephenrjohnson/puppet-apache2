@@ -20,9 +20,9 @@ define apache2::vproxy($servername = '', $serveradmin = 'root@localhost', $alogl
     
     if $ssl != false
     {
-       $sslcert = $sslkeys + ".cert"
-       $sslkey = $sslkeys + ".key"
-       $sslca = $sslkeys + ".ca"
+       $sslcert = "${sslkeys}.cert"
+       $sslkey = "${sslkeys}.key"
+       $sslca = "${sslkeys}.ca"
     }
     
     file { "/etc/apache2/sites-available/$name.conf":

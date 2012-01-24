@@ -28,9 +28,9 @@ define apache2::vhost($servername = '', $serveradmin = 'root@localhost', $docroo
 
     if $ssl != false
     {
-       $sslcert = $sslkeys + ".cert"
-       $sslkey = $sslkeys + ".key"
-       $sslca = $sslkeys + ".ca"
+       $sslcert = "${sslkeys}.cert"
+       $sslkey = "${sslkeys}.key"
+       $sslca = "${sslkeys}.ca"
     }
 
     file { "/etc/apache2/sites-enabled/$name.conf":
