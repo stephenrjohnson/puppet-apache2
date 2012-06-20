@@ -26,7 +26,7 @@ define apache2::vproxy($servername = '', $serveradmin = 'root@localhost',
         $sslca = "${sslkeys}.ca"
     }
 
-    file { "/etc/apache2/sites-available/${name.conf}":
+    file { "/etc/apache2/sites-available/$name.conf":
         ensure  => present,
         mode    => '0440',
         owner   => root,
@@ -35,7 +35,7 @@ define apache2::vproxy($servername = '', $serveradmin = 'root@localhost',
         content => template('apache2/vproxy.conf.erb');
     }
 
-    file { "/etc/apache2/sites-enabled/${name.conf}":
+    file { "/etc/apache2/sites-enabled/$name.conf":
         ensure => link,
         target => "/etc/apache2/sites-available/${name}.conf",
         notify => Service[apache2],

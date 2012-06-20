@@ -1,6 +1,7 @@
 class apache2 ($defaultsite = false, $disablehttp = false,
     $enablessl = false, $enableproxy = false,
-    $defaultsslsite = false, $security = true){
+    $defaultsslsite = false, $security = true)
+{
     ##Install the apache module
     package { 'apache2': ensure => installed; }
 
