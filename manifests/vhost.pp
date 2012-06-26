@@ -36,7 +36,7 @@ define apache2::vhost($servername = '', $serveradmin = 'root@localhost',
 
     file { "/etc/apache2/sites-enabled/$name.conf":
           ensure => link,
-          target => "/etc/apache2/sites-available/${name.conf}",
+          target => "/etc/apache2/sites-available/$name.conf",
           notify => Service[apache2],
     }
 
