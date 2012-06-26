@@ -18,6 +18,14 @@ define apache2::vhost($servername = '', $serveradmin = 'root@localhost',
       $aport = $port
     }
 
+    
+    if $ssl != false
+    {
+      $sslcert = "${sslkeys}.cert"
+      $sslkey = "${sslkeys}.key"
+      $sslca = "${sslkeys}.ca"
+    }
+
     file { "/etc/apache2/sites-available/$name.conf":
         ensure  => present,
         mode    => '0440',
@@ -27,12 +35,6 @@ define apache2::vhost($servername = '', $serveradmin = 'root@localhost',
         content => template('apache2/vhost.conf.erb');
     }
 
-    if $ssl != false
-    {
-      $sslcert = "${sslkeys}.cert"
-      $sslkey = "${sslkeys}.key"
-      $sslca = "${sslkeys}.ca"
-    }
 
     file { "/etc/apache2/sites-enabled/$name.conf":
           ensure => link,
