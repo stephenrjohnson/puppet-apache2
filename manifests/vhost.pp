@@ -18,7 +18,7 @@ define apache2::vhost($servername = '', $serveradmin = 'root@localhost',
       $aport = $port
     }
 
-    file { "/etc/apache2/sites-available/${name.conf}":
+    file { "/etc/apache2/sites-available/$name.conf":
         ensure  => present,
         mode    => '0440',
         owner   => root,
@@ -34,7 +34,7 @@ define apache2::vhost($servername = '', $serveradmin = 'root@localhost',
       $sslca = "${sslkeys}.ca"
     }
 
-    file { "/etc/apache2/sites-enabled/${name.conf}":
+    file { "/etc/apache2/sites-enabled/$name.conf":
           ensure => link,
           target => "/etc/apache2/sites-available/${name.conf}",
           notify => Service[apache2],
